@@ -5,6 +5,6 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
         <property name="java-output-path" value="/FluxoAGES/build/classes"/>
-        <property name="context-root" value="FluxoAGES"/>
+        <property name="context-root" value="testSecurity"/>
     </wb-module>
 </project-modules>

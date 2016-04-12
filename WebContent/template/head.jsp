@@ -71,16 +71,7 @@
 				          	</ul>
         				</li>
 
-			        	<li class="dropdown">
-			          		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Projetos
-				          		<span class="caret"></span>
-			          		</a>
-				          	<ul class="dropdown-menu">
-				            	<li><a href="main?acao=listaProjetos">Listar</a></li>
-				            	<li><a href="main?acao=telaProjeto">Cadastrar</a></li> 
-				          	</ul>
-        				</li>
-        				
+			                				
         				<li class="dropdown">
 			          		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Stakeholders
 				          		<span class="caret"></span>
@@ -91,17 +82,7 @@
 				          	</ul>
         				</li>
 
-        				<li class="dropdown">
-			          		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Alunos
-				          		<span class="caret"></span>
-			          		</a>
-				          	<ul class="dropdown-menu">
-				            	<li><a href="main?acao=registrarPonto">Registrar Ponto</a></li>
-				            	<li><a href="main?acao=listaPontoHora&id_usuario=0">Lista Horas Ponto</a></li>
-				            	<li><a href="main?acao=ListaPontoHoraInvalido&id_usuario=0">Lista Horas Ponto Inválidos</a>
-				          	</ul>
-        				</li>
-
+        			
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">

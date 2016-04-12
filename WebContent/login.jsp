@@ -37,7 +37,7 @@
     		<div class="panel panel-primary panel-login">
     		
     			<div class="panel-heading text-center">
-    				Sistema de Controle de Fluxo de Projetos
+    				Sistema de Exemplo para o Framework Security AGES
     			</div>
                 <div class="panel-body">
     

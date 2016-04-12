@@ -23,21 +23,19 @@ public class LoginCommand implements Command {
 		usuarioBO = new UsuarioBO();
 		util = new Util();
 
-		String usuario = request.getParameter("login");
-		String senha = request.getParameter("senha");
 
-		Usuario usuarioDTO = new Usuario(usuario, senha);
+		Usuario usuarioDTO = new Usuario((String) request.getParameter("login"), (String) request.getParameter("senha"));
 
 		try {
 			user = usuarioBO.validaUsuario(usuarioDTO); 
 			if (user != null) {
 				request.getSession().setAttribute("usuarioSessao", user);
 				request.getSession().setAttribute("versao", util.getVersion());
-				proxima = "main?acao=listaProjetos";
+				proxima = "index.jsp";
 			
 			}
 		} catch (NegocioException e) {
-			request.setAttribute("msgErro", e.getMessage());
+			request.setAttribute("msgErro" , e.getMessage());
 			return proxima;
 		}
 		
