@@ -1,8 +1,11 @@
 package br.ages.security.interfaces;
 
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import br.ages.security.interfaces.models.IAgesSecurityResult;
+import br.ages.security.interfaces.models.IAgesSecurityUser;
 
 public interface IAgesSecurity {
 	
@@ -11,6 +14,10 @@ public interface IAgesSecurity {
 	*
 	* @param request contexto da requisição http 
 	* @param user usuário a ser validado
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	*/
-	IAgesSecurityResult Validate(HttpServletRequest request, IAgesSecurity user);
+	IAgesSecurityResult validate(HttpServletRequest request, String username, String password)
+			throws ClassNotFoundException, SQLException;
+
 }

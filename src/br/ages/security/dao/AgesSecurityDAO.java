@@ -13,14 +13,14 @@ import br.ages.security.models.AgesSecurityUser;
 public class AgesSecurityDAO implements IAgesSecurityDAO {
 
 	@Override
-	public IAgesSecurityUser GetUserByUsernameAndPassword(String username, String password) throws ClassNotFoundException, SQLException {
-		AgesSecurityUser user = new AgesSecurityUser();
+	public IAgesSecurityUser getUserByUsernameAndPassword(String username, String password) throws ClassNotFoundException, SQLException {
+		AgesSecurityUser user = null;
 				
 		Connection connection = ConnectionUtil.getConnection();
 		
+		// TODO - tratamento para evitar SQL injection
 		StringBuilder sql = new StringBuilder();
-		sql.append("select * from tb_usuario ");
-		sql.append("where usuario = ? and senha = ?");
+		sql.append("select * from tb_usuario where usuario = ? and senha = ?");
 
 		PreparedStatement statement = connection.prepareStatement(sql.toString());
 		statement.setString(1, username);
@@ -28,10 +28,8 @@ public class AgesSecurityDAO implements IAgesSecurityDAO {
 
 		ResultSet resultset = statement.executeQuery();
 		if (resultset.next()) {
-			user.setUsername(resultset.getString("USERNAME"));
-			user.setUsername(resultset.getString("USERNAME"));
-		} else {
-			user = null;
+			user = new AgesSecurityUser();
+			user.setUsername(resultset.getString("USUARIO"));
 		}
 		
 		return user;

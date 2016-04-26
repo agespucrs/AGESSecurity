@@ -42,7 +42,9 @@
                 <div class="panel-body">
     
     				<h1 class="welcome">Bem <span class="ages">v</span>indo!</h1>
+    				
     				<jsp:include page="/template/msg.jsp"></jsp:include>
+    				
  			         <form method="post" action="main?acao=login">
 			         	<div class="form-group">
 			            	<label class="form-label ages">Usuário:</label>

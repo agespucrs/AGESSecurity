@@ -5,5 +5,5 @@ import java.sql.SQLException;
 import br.ages.security.interfaces.models.IAgesSecurityUser;
 
 public interface IAgesSecurityDAO {
-	IAgesSecurityUser GetUserByUsernameAndPassword(String username, String password) throws ClassNotFoundException, SQLException;
+	IAgesSecurityUser getUserByUsernameAndPassword(String username, String password) throws ClassNotFoundException, SQLException;
 }
