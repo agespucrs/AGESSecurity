@@ -50,13 +50,18 @@
 			            	<label class="form-label ages">Usuário:</label>
 			            	<input class="form-control" id="login" name="login" value="${param.login}" type="text" maxlength="120" required>
 		             	</div>
+		             	
 		             	<div class="form-group">
 			            	<label class="form-label ages">Senha:</label>
 			            	<input class="form-control" id="senha" name="senha" value="${param.senha}" type="password" maxlength="15" required>
 		            	</div>
+		            	
 		            	<i class="glyphicon glyphicon-lock"></i>
+		            	
 		            	<a href="" data-toggle="modal" data-id="login" data-usuario="#login" data-target="#modalSenha" title="Click para recuperar a senha senha"> Recuperar Senha</a>
+		            	
 		             	<hr>
+		             	
 			            <div class="text-center">
 			             	<input class="btn btn-primary login pull-center" type="submit" value="Entrar">
 			         	</div>

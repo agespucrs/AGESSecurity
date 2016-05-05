@@ -14,7 +14,6 @@ public class LoginCommand implements Command {
 	private UsuarioBO usuarioBO;
 	private String proxima;
 	private Util util;
-	private AgesSecurity agesSecurity;
 
 	@Override
 	public String execute(HttpServletRequest request) {
@@ -23,19 +22,18 @@ public class LoginCommand implements Command {
 		Usuario user = new Usuario();
 		usuarioBO = new UsuarioBO();
 		util = new Util();
-		agesSecurity = new AgesSecurity();
 
 		String username = request.getParameter("login");
 		String password = request.getParameter("senha");
 		
 		try {
-			AgesSecurityResult result = (AgesSecurityResult) agesSecurity.validate(request, username, password);
+			AgesSecurityResult result = (AgesSecurityResult) AgesSecurity.validate(request, username, password);
 			
 			if (result.isSucceeded()) {
 				proxima = "index.jsp";
 				
 				// TODO - Obter Usuario do sistema cliente a partir do usuário AgesSecurityUser
-				Usuario usuarioDTO = new Usuario((String) request.getParameter("login"), (String) request.getParameter("senha"));
+				Usuario usuarioDTO = new Usuario(username, password);
 				user = usuarioBO.validaUsuario(usuarioDTO);
 				request.getSession().setAttribute("usuarioSessao", user);
 				request.getSession().setAttribute("versao", util.getVersion());

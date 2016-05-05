@@ -5,21 +5,23 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 
 import br.ages.security.dao.AgesSecurityDAO;
-import br.ages.security.interfaces.IAgesSecurity;
 import br.ages.security.interfaces.models.IAgesSecurityResult;
 import br.ages.security.models.AgesSecurityResult;
 import br.ages.security.models.AgesSecurityUser;
 
-public class AgesSecurity implements IAgesSecurity {
+public final class AgesSecurity {
 
-	private AgesSecurityDAO agesSecurityDao;
+	private static AgesSecurityDAO agesSecurityDao;
 	
-	public AgesSecurity() {
+	static {
+		agesSecurityDao = new AgesSecurityDAO();
+	}
+	
+	private AgesSecurity() {
 		this.agesSecurityDao = new AgesSecurityDAO();
 	}
 
-	@Override
-	public IAgesSecurityResult validate(HttpServletRequest request, String username, String password) throws ClassNotFoundException, SQLException {
+	public static IAgesSecurityResult validate(HttpServletRequest request, String username, String password) throws ClassNotFoundException, SQLException {
 		
 		AgesSecurityResult result = new AgesSecurityResult();
 		
@@ -31,7 +33,7 @@ public class AgesSecurity implements IAgesSecurity {
 			request.getSession().setAttribute("AgesSecurityUser", user);
 			
 		} else {
-			result.setMessage("O usuário não está autorizado");
+			result.setMessage("O usuário não está cadastrado");
 		}
 		
 		return result;

@@ -78,8 +78,6 @@ public class MainServlet extends HttpServlet {
 			Command comando = verificarComando(acao);
 			proxima = comando.execute(request);
 			Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioSessao");
-			if(usuario != null)
-				logger.debug("User: " +usuario.getUsuario() + " - comando " + comando.toString() + " acao: " +acao );
 		} catch (NegocioException | SQLException | ParseException | PersistenciaException e) {
 			request.setAttribute("msgErro", e.getMessage());
 		}
