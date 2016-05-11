@@ -38,4 +38,11 @@ public final class AgesSecurity {
 		
 		return result;
 	}
+	
+	public static IAgesSecurityResult logout(HttpServletRequest request){
+		AgesSecurityResult result = new AgesSecurityResult();
+		request.getSession().setAttribute("AgesSecurityUser", null);
+		result.setIsSucceeded(true);
+		return result;
+	}
 }
