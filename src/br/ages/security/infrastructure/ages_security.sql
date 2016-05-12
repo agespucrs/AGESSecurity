@@ -1,5 +1,6 @@
-/***
-* Scripts para criacao e insersao de dados para utilização do framework de segurança AgesSecurity
-***/
-
--- TODO
+CREATE TABLE ages_security_user (
+  ID CHAR(36) NOT NULL,
+  USERNAME VARCHAR(150) NOT NULL,
+  PASSWORD VARCHAR(150) NOT NULL,
+  PRIMARY KEY (ID) ,
+  UNIQUE INDEX USERNAME_UNIQUE (USERNAME));

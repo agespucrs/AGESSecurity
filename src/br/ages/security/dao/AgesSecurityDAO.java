@@ -20,7 +20,7 @@ public class AgesSecurityDAO implements IAgesSecurityDAO {
 		
 		// TODO - tratamento para evitar SQL injection
 		StringBuilder sql = new StringBuilder();
-		sql.append("select * from tb_usuario where usuario = ? and senha = ?");
+		sql.append("select * from ages_security_user where username = ? and password = ?");
 
 		PreparedStatement statement = connection.prepareStatement(sql.toString());
 		statement.setString(1, username);
@@ -29,7 +29,7 @@ public class AgesSecurityDAO implements IAgesSecurityDAO {
 		ResultSet resultset = statement.executeQuery();
 		if (resultset.next()) {
 			user = new AgesSecurityUser();
-			user.setUsername(resultset.getString("USUARIO"));
+			user.setUsername(resultset.getString("USERNAME"));
 		}
 		
 		return user;

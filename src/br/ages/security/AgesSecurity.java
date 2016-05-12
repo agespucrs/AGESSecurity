@@ -16,10 +16,6 @@ public final class AgesSecurity {
 	static {
 		agesSecurityDao = new AgesSecurityDAO();
 	}
-	
-	private AgesSecurity() {
-		this.agesSecurityDao = new AgesSecurityDAO();
-	}
 
 	public static IAgesSecurityResult validate(HttpServletRequest request, String username, String password) throws ClassNotFoundException, SQLException {
 		
@@ -31,7 +27,6 @@ public final class AgesSecurity {
 		if (user != null){
 			result.setIsSucceeded(true);
 			request.getSession().setAttribute("AgesSecurityUser", user);
-			
 		} else {
 			result.setMessage("O usuário não está cadastrado");
 		}
