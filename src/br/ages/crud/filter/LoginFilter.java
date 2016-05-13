@@ -1,4 +1,4 @@
-package br.ages.crud.filter;
+/*package br.ages.crud.filter;
 
 import java.io.IOException;
 import java.util.Date;
@@ -17,25 +17,25 @@ import org.apache.log4j.Logger;
 
 import br.ages.crud.util.MensagemContantes;
 
-/**
+*//**
  * Servlet Filter implementation class LoginFilter
- */
+ *//*
 @WebFilter("/*")
 public class LoginFilter implements Filter {
 	
 	Logger logger = Logger.getLogger("servlet.FileUploadServlet");
 	private static final String[] URLS_TO_EXCLUDE = {".css", ".js", ".jpg", ".png", ".gif","login.jsp","/FluxoAGES/" };
 
-	/**
+	*//**
 	 * @see Filter#destroy()
-	 */
+	 *//*
 	public void destroy() {
 		logger.info("Filtro de Login Finalizado " + new Date());
 	}
 
-	/**
+	*//**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
+	 *//*
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = ((HttpServletRequest) request);
 
@@ -56,9 +56,9 @@ public class LoginFilter implements Filter {
 		}
 	}
 
-	/**
+	*//**
 	 * @see Filter#init(FilterConfig)
-	 */
+	 *//*
 	public void init(FilterConfig fConfig) throws ServletException {
 		logger.info("Filtro de Login Inicializado " + new Date());
 	}
@@ -84,3 +84,4 @@ public class LoginFilter implements Filter {
 	
 
 }
+*/
