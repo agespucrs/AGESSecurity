@@ -12,6 +12,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import br.ages.crud.util.MensagemContantes;
@@ -67,7 +68,7 @@ public final class AgesSecurity implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = ((HttpServletRequest) request);
-	    String servletPath = ((HttpServletRequest) request).getServletPath().split("/")[1];  
+	    String servletPath = ((HttpServletRequest) request).getServletPath().split("/")[1];   
 	    
 	    // TODO - Obter URLs protegidas do xml de configuração
 		ArrayList<String> protectedUrls = new ArrayList<String>();
@@ -78,7 +79,7 @@ public final class AgesSecurity implements Filter {
 			if (session.getAttribute(SESSION_KEY) == null) {
 				
 				// TODO - Obter URL de redirecionamento do xml de configuração
-				request.getRequestDispatcher("login.jsp").forward(request, response);
+				((HttpServletResponse)response).sendError(HttpServletResponse.SC_FORBIDDEN);
 			} else {
 				chain.doFilter(request, response);
 			}
