@@ -34,4 +34,18 @@ public class AgesSecurityDAO implements IAgesSecurityDAO {
 		
 		return user;
 	}
+	
+	public boolean deleteUserbyId(Integer idUsuario) throws ClassNotFoundException, SQLException{
+		
+		Connection connection = ConnectionUtil.getConnection();
+		
+		boolean isSucceed = false;
+			java.sql.Statement st = connection.createStatement();
+			StringBuilder sql = new StringBuilder();
+			sql.append("delete * from ages_security_user where id = "+idUsuario );
+			isSucceed= true;
+			
+		return isSucceed;
+	}
+	
 }
