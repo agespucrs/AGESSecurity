@@ -192,7 +192,7 @@ public class UsuarioDAO {
 			StringBuilder sql = new StringBuilder();
 			// sql.append("SELECT ID_TIPO_USUARIO FROM TB_USUARIO WHERE ID_USUARIO = ?
 			// ")
-			sql.append("delete from tb_usuario where id_usuario= ? ");
+			sql.append("delete from tb_usuario where id_usuario= ?");
 			// sql.append("DELETE FROM TB_TIPO_USUARIO WHERE
 			PreparedStatement statement = conexao.prepareStatement(sql.toString());
 			statement.setInt(1, idUsuario);
@@ -221,6 +221,7 @@ public class UsuarioDAO {
 			StringBuilder sql = new StringBuilder();
 			// sql.append("SELECT * FROM TB_USUARIO WHERE NOME = ?");
 			sql.append("select ");
+			
 			sql.append("u.`id_usuario`,");
 			sql.append("u.`usuario`,");
 			sql.append("u.`senha`,");
