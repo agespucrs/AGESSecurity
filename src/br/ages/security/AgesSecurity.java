@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import br.ages.crud.util.MensagemContantes;
+import br.ages.security.util.Constantes;
 import br.ages.security.dao.AgesSecurityDAO;
 import br.ages.security.interfaces.models.IAgesSecurityResult;
 import br.ages.security.models.AgesSecurityResult;
@@ -23,8 +23,6 @@ import br.ages.security.models.AgesSecurityUser;
 
 @WebFilter("/*")
 public final class AgesSecurity implements Filter {
-	
-	private static final String SESSION_KEY = "AgesSecurityUser";
 	private static AgesSecurityDAO agesSecurityDao;
 	
 	static {
@@ -36,12 +34,10 @@ public final class AgesSecurity implements Filter {
 		
 		AgesSecurityResult result = new AgesSecurityResult();
 		
-		// TODO Acessa o banco e verifica se nome e senha são válidos
 		AgesSecurityUser user = (AgesSecurityUser) agesSecurityDao.getUserByUsernameAndPassword(username, password);
-		
 		if (user != null){
 			result.setIsSucceeded(true);
-			request.getSession().setAttribute(SESSION_KEY, user);
+			request.getSession().setAttribute(Constantes.SESSION_KEY, user);
 		} else {
 			result.setMessage("O usuário não está cadastrado");
 		}
@@ -72,11 +68,11 @@ public final class AgesSecurity implements Filter {
 	    
 	    // TODO - Obter URLs protegidas do xml de configuração
 		ArrayList<String> protectedUrls = new ArrayList<String>();
-		protectedUrls.add("index.jsp"); 
+		protectedUrls.add("index.jsp");
 	
 		if (protectedUrls.contains(servletPath)) {
 			HttpSession session = httpRequest.getSession();
-			if (session.getAttribute(SESSION_KEY) == null) {
+			if (session.getAttribute(Constantes.SESSION_KEY) == null) {
 				
 				// TODO - Obter URL de redirecionamento do xml de configuração
 				((HttpServletResponse)response).sendError(HttpServletResponse.SC_FORBIDDEN);

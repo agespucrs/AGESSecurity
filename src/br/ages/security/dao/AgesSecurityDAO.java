@@ -5,10 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import br.ages.security.infrastructure.ConnectionUtil;
 import br.ages.security.interfaces.dao.IAgesSecurityDAO;
 import br.ages.security.interfaces.models.IAgesSecurityUser;
 import br.ages.security.models.AgesSecurityUser;
+import br.ages.security.util.ConnectionUtil;
+import br.ages.security.util.Util;
 
 public class AgesSecurityDAO implements IAgesSecurityDAO {
 
@@ -24,14 +25,15 @@ public class AgesSecurityDAO implements IAgesSecurityDAO {
 
 		PreparedStatement statement = connection.prepareStatement(sql.toString());
 		statement.setString(1, username);
-		statement.setString(2, password);
+		statement.setString(2, Util.encrytpPassword(password));
 
 		ResultSet resultset = statement.executeQuery();
 		if (resultset.next()) {
 			user = new AgesSecurityUser();
 			user.setUsername(resultset.getString("USERNAME"));
+			user.setPassword(resultset.getString("PASSWORD"));
 		}
 		
 		return user;
-	}
+	} 
 }

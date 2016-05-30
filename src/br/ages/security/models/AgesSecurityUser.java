@@ -1,6 +1,7 @@
 package br.ages.security.models;
 
 import br.ages.security.interfaces.models.IAgesSecurityUser;
+import br.ages.security.util.Util;
 
 public class AgesSecurityUser implements IAgesSecurityUser {
 
@@ -17,6 +18,6 @@ public class AgesSecurityUser implements IAgesSecurityUser {
 		return password;
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = Util.encrytpPassword(password);
 	}
 }
