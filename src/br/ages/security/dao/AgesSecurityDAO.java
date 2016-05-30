@@ -5,11 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import br.ages.security.util.ConnectionUtil;
+import br.ages.security.util.Util;
 import br.ages.security.interfaces.dao.IAgesSecurityDAO;
 import br.ages.security.interfaces.models.IAgesSecurityUser;
 import br.ages.security.models.AgesSecurityUser;
-import br.ages.security.util.ConnectionUtil;
-import br.ages.security.util.Util;
 
 public class AgesSecurityDAO implements IAgesSecurityDAO {
 
@@ -31,9 +31,23 @@ public class AgesSecurityDAO implements IAgesSecurityDAO {
 		if (resultset.next()) {
 			user = new AgesSecurityUser();
 			user.setUsername(resultset.getString("USERNAME"));
-			user.setPassword(resultset.getString("PASSWORD"));
 		}
 		
 		return user;
-	} 
+	}
+	
+	public boolean deleteUserbyId(Integer idUsuario) throws ClassNotFoundException, SQLException{
+		
+		Connection connection = ConnectionUtil.getConnection();
+		
+		boolean isSucceed = false;
+			
+		java.sql.Statement st = connection.createStatement();
+		StringBuilder sql = new StringBuilder();
+		sql.append("delete * from ages_security_user where id = "+ idUsuario );
+		isSucceed= true;
+			
+		return isSucceed;
+	}
+	
 }
