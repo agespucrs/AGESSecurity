@@ -8,7 +8,6 @@ import br.ages.crud.model.Usuario;
 import br.ages.crud.util.Util;
 import br.ages.security.AgesSecurity;
 import br.ages.security.models.AgesSecurityResult;
-import br.ages.security.util.Constantes;
 
 public class LoginCommand implements Command {
 
@@ -33,7 +32,10 @@ public class LoginCommand implements Command {
 			if (result.isSucceeded()) {
 				proxima = "index.jsp";
 				
-				request.getSession().setAttribute("usuarioSessao", request.getSession().getAttribute(Constantes.SESSION_KEY));
+				// TODO - Obter Usuario do sistema cliente a partir do usuário AgesSecurityUser
+				Usuario usuarioDTO = new Usuario(username, password);
+				user = usuarioBO.validaUsuario(usuarioDTO);
+				request.getSession().setAttribute("usuarioSessao", user);
 				request.getSession().setAttribute("versao", util.getVersion());
 			}
 			else {

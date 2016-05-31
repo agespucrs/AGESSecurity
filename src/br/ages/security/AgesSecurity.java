@@ -1,6 +1,7 @@
 package br.ages.security;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,14 +38,27 @@ public final class AgesSecurity implements Filter {
 		
 		AgesSecurityResult result = new AgesSecurityResult();
 		
-		// TODO Acessa o banco e verifica se nome e senha são válidos
-		AgesSecurityUser user = (AgesSecurityUser) agesSecurityDao.getUserByUsernameAndPassword(username, password);
-		
-		if (user != null){
-			result.setIsSucceeded(true);
-			request.getSession().setAttribute(SESSION_KEY, user);
-		} else {
-			result.setMessage("O usuário não está cadastrado");
+		try{
+			AgesSecurityUser user = (AgesSecurityUser) agesSecurityDao.getUserByUsernameAndPassword(username, password);	
+			if (user != null) {
+				result.setIsSucceeded(true);
+				request.getSession().setAttribute(SESSION_KEY, user);
+			} 
+			else {
+				result.setMessage("O usuário não está cadastrado");
+			}
+		} 
+		catch(ClassNotFoundException cnfe){
+			result.setMessage("Exceção interna: classe não encontrada.");
+		}
+		catch(SQLException sqle){
+			result.setMessage("Erro na comunicação com o banco de dados.");
+		}
+		catch(NoSuchAlgorithmException nsae){
+			result.setMessage("Algortimo de criptografia não encontrado.");
+		}
+		catch(Exception e) {
+			result.setMessage("Ocorreu um erro inesperado.");
 		}
 		
 		return result;

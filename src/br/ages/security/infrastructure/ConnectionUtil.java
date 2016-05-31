@@ -1,4 +1,4 @@
-package br.ages.security.util;
+package br.ages.security.infrastructure;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

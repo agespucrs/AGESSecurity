@@ -9,6 +9,12 @@
     <location>/login.jsp</location>
   </error-page>
   
+  <!-- Parâmetros da conexão -->
+  <context-param>
+    <param-name>protected-resources</param-name>
+    <param-value>index, index2, index3</param-value>
+  </context-param>
+  
   <!-- URLs protegidas -->
   <context-param>
     <param-name>protected-resources</param-name>

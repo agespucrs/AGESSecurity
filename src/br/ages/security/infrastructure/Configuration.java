@@ -1,4 +1,4 @@
-package br.ages.security.util;
+package br.ages.security.infrastructure;
 
 public class Configuration {
 	public static final String ENVIRONMENT_PROPERTIES = "ambiente";

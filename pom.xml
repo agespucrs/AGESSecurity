@@ -21,7 +21,7 @@
 			<properties>
 				<sgbd.url>jdbc:mysql://localhost:3306/security_e</sgbd.url>
 				<sgbd.user>root</sgbd.user>
-				<sgbd.password>123</sgbd.password>
+				<sgbd.password>senha</sgbd.password>
 				<upload.path>c:\\uploadProjetos</upload.path>
 				<log.path>c:\\cawt\\</log.path>
 			</properties>

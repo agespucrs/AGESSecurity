@@ -1,4 +1,4 @@
-<%@page import="br.ages.security.models.AgesSecurityUser"%>
+<%@page import="br.ages.crud.model.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -47,7 +47,7 @@
 	</head>
     
     <body>
-     <% AgesSecurityUser usuarioSessao = (AgesSecurityUser) session.getAttribute("usuarioSessao"); %>
+     <% Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioSessao"); %>
     	<div class="container">
     	
     			<nav class="navbar navbar-default">
@@ -89,7 +89,7 @@
         				<li class="dropdown">
         					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
         						<span class="glyphicon glyphicon-user"></span>
-        						Olá, <%=usuarioSessao.getUsername()%>!
+        						Olá, <%=usuarioSessao.getNome()%>!
         						<span class="caret"></span>
         					</a>
                            
