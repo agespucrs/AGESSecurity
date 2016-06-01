@@ -95,7 +95,8 @@ public final class AgesSecurity implements Filter {
 			if (requestedUrl.contains(resource)) {
 				HttpSession session = httpServletRequest.getSession();
 				if (session.getAttribute(SESSION_KEY) == null) {
-					((HttpServletResponse)response).sendError(HttpServletResponse.SC_FORBIDDEN);
+					((HttpServletResponse)response).sendError(HttpServletResponse.SC_UNAUTHORIZED);
+					return;
 				} else {
 					chain.doFilter(request, response);
 				}
@@ -113,7 +114,6 @@ public final class AgesSecurity implements Filter {
 		} catch(Exception e){
 			String message = e.getMessage();
 		}
-		
 	}
 	
 	/**************** Fim Filtro (autorização) ****************/
