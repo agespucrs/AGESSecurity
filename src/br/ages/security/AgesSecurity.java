@@ -72,6 +72,16 @@ public final class AgesSecurity implements Filter {
 		return result;
 	}
 	
+	public static IAgesSecurityResult create (String username, String password) throws ClassNotFoundException, NoSuchAlgorithmException, SQLException{
+		AgesSecurityResult result = new AgesSecurityResult ();
+		AgesSecurityDAO createUser = new AgesSecurityDAO ();
+		
+		if(createUser.Create(username, password)){
+			result.setMessage("Usuario cadastrado com sucesso.");
+		}
+		else result.setMessage("Nome de usuario já cadastrado");
+		return result;
+	}
 	
 	/**************** Filtro (autorização) ****************/
 
