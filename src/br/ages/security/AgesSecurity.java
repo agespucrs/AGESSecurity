@@ -9,6 +9,7 @@ import java.util.Arrays;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -30,7 +31,7 @@ public final class AgesSecurity implements Filter {
 	private static ArrayList<String> protectedResources;
 	
 	static {
-		agesSecurityDao = new AgesSecurityDAO();
+		// agesSecurityDao = new AgesSecurityDAO();
 	}
 
 	// Valida se o usuário está no banco gerenciado pelo AgesSecurity
@@ -109,9 +110,16 @@ public final class AgesSecurity implements Filter {
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
 		try{
-			// Lê a lista de URLs protegidas 
-			protectedResources = new ArrayList<String>(Arrays.asList(arg0.getServletContext().getInitParameter("protected-resources").split(",")));	
-		} catch(Exception e){
+			ServletContext context = arg0.getServletContext();
+			
+			// Detalhes da conexão com o banco de dados
+			agesSecurityDao = new AgesSecurityDAO(context);
+			
+			// Lista de URLs protegidas 
+			protectedResources = new ArrayList<String>(Arrays.asList(context.getInitParameter("protected-resources").split(",")));			
+		} 
+		catch(Exception e) {
+			// TODO - log
 			String message = e.getMessage();
 		}
 	}

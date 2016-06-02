@@ -3,22 +3,36 @@ package br.ages.security.dao;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.ServletContext;
+
+import br.ages.security.infrastructure.Configuration;
 import br.ages.security.infrastructure.ConnectionUtil;
 import br.ages.security.interfaces.dao.IAgesSecurityDAO;
 import br.ages.security.interfaces.models.IAgesSecurityUser;
 import br.ages.security.models.AgesSecurityUser;
 
 public class AgesSecurityDAO implements IAgesSecurityDAO {
+	
+	private Connection connection;
+	
+	public AgesSecurityDAO(ServletContext context) throws SQLException, ClassNotFoundException{
+		String connectionUrl = context.getInitParameter("connection-url");
+		String sgbdUser = context.getInitParameter("sgbd-user");
+		String sgbdPassword = context.getInitParameter("sgbd-password");
+		String sgbdDriver = context.getInitParameter("sgbd-driver");
+		
+		Class.forName(sgbdDriver);
+		connection = DriverManager.getConnection(connectionUrl, sgbdUser, sgbdPassword);
+	}
 
 	@Override
 	public IAgesSecurityUser getUserByUsernameAndPassword(String username, String password) throws ClassNotFoundException, SQLException, NoSuchAlgorithmException {
 		AgesSecurityUser user = null;
-				
-		Connection connection = ConnectionUtil.getConnection();
 		
 		StringBuilder sql = new StringBuilder();
 		sql.append("select * from ages_security_user where username = ? and password = ?");
@@ -29,6 +43,7 @@ public class AgesSecurityDAO implements IAgesSecurityDAO {
 		//TODO - voltar com a criptografia após a método de criação do usuário 
 		// statement.setString(2, encrytpPassword(password));
 		statement.setString(2, password);
+		
 
 		ResultSet resultset = statement.executeQuery();
 		if (resultset.next()) {
