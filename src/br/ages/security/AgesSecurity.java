@@ -29,10 +29,6 @@ public final class AgesSecurity implements Filter {
 	private static final String SESSION_KEY = "AgesSecurityUser";
 	private static AgesSecurityDAO agesSecurityDao;
 	private static ArrayList<String> protectedResources;
-	
-	static {
-		// agesSecurityDao = new AgesSecurityDAO();
-	}
 
 	// Valida se o usuário está no banco gerenciado pelo AgesSecurity
 	public static IAgesSecurityResult validate(HttpServletRequest request, String username, String password) throws ClassNotFoundException, SQLException {
@@ -68,11 +64,23 @@ public final class AgesSecurity implements Filter {
 	// Remove validação do usuário
 	public static IAgesSecurityResult logout(HttpServletRequest request) {
 		AgesSecurityResult result = new AgesSecurityResult();
-		request.getSession().setAttribute("AgesSecurityUser", null);
+		request.getSession().setAttribute(SESSION_KEY, null);
 		result.setIsSucceeded(true);
 		return result;
 	}
 	
+	public static IAgesSecurityResult create (String username, String password) throws ClassNotFoundException, NoSuchAlgorithmException, SQLException{
+		AgesSecurityResult result = new AgesSecurityResult ();
+		
+		if(agesSecurityDao.Create(username, password)){
+			result.setMessage("Usuario cadastrado com sucesso.");
+		}
+		else {
+			result.setMessage("Nome de usuario já cadastrado");
+		} 
+			
+		return result;
+	}
 	
 	/**************** Filtro (autorização) ****************/
 
