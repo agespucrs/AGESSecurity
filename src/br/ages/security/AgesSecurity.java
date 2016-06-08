@@ -90,6 +90,16 @@ public final class AgesSecurity implements Filter {
 		
 	}
 
+	public void removerUsuario(String username) throws ClassNotFoundException, NoSuchAlgorithmException, SQLException{
+		AgesSecurityResult result = new AgesSecurityResult ();
+		
+		if(agesSecurityDao.deleteUserbyName(username)){
+			result.setMessage("Usuário deletado com sucesso.");
+		}else {
+			result.setMessage("Usuário inexistente");
+		}
+	}
+	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// Obtendo URL requisitada
