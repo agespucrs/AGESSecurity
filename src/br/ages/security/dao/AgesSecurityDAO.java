@@ -11,7 +11,6 @@ import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
-import br.ages.security.infrastructure.Configuration;
 import br.ages.security.infrastructure.ConnectionUtil;
 import br.ages.security.interfaces.dao.IAgesSecurityDAO;
 import br.ages.security.interfaces.models.IAgesSecurityUser;
@@ -41,10 +40,7 @@ public class AgesSecurityDAO implements IAgesSecurityDAO {
 
 		PreparedStatement statement = connection.prepareStatement(sql.toString());
 		statement.setString(1, username);
-
-		// TODO - voltar com a criptografia após a método de criação do usuário
-		// statement.setString(2, encrytpPassword(password));
-		statement.setString(2, password);
+		statement.setString(2, encrytpPassword(password));
 
 		ResultSet resultset = statement.executeQuery();
 		if (resultset.next()) {
@@ -56,16 +52,19 @@ public class AgesSecurityDAO implements IAgesSecurityDAO {
 	}
 
 	public boolean deleteUserbyName(String username) throws ClassNotFoundException, SQLException {
-
 		Connection connection = ConnectionUtil.getConnection();
-
 		boolean isSucceed = false;
-
-		java.sql.Statement st = connection.createStatement();
+		
 		StringBuilder sql = new StringBuilder();
-		sql.append("delete * from ages_security_user where username = " + username);
-		isSucceed = true;
-
+		sql.append("delete * from ages_security_user where username = ?");
+		
+		PreparedStatement statement = connection.prepareStatement(sql.toString());
+		statement.setString(1, username);
+		
+		if (statement.execute()) {
+			isSucceed = true;			
+		}
+		
 		return isSucceed;
 	}
 
