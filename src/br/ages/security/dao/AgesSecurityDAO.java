@@ -43,8 +43,7 @@ public class AgesSecurityDAO implements IAgesSecurityDAO {
 		statement.setString(1, username);
 
 		// TODO - voltar com a criptografia após a método de criação do usuário
-		// statement.setString(2, encrytpPassword(password));
-		statement.setString(2, password);
+		statement.setString(2, encrytpPassword(password));
 
 		ResultSet resultset = statement.executeQuery();
 		if (resultset.next()) {
