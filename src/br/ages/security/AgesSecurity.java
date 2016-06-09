@@ -110,16 +110,18 @@ public final class AgesSecurity implements Filter {
 			requestedUrl += "?" + httpServletRequest.getQueryString(); 
 		}
 	    
-		for (String resource : protectedResources) { 
-			if (requestedUrl.contains(resource)) {
-				HttpSession session = httpServletRequest.getSession();
-				if (session.getAttribute(SESSION_KEY) == null) {
-					((HttpServletResponse)response).sendError(HttpServletResponse.SC_UNAUTHORIZED);
-					return;
-				} else {
-					chain.doFilter(request, response);
-				}
-			} 
+		if ( protectedResources != null ) {
+			for (String resource : protectedResources) { 
+				if (requestedUrl.contains(resource)) {
+					HttpSession session = httpServletRequest.getSession();
+					if (session.getAttribute(SESSION_KEY) == null) {
+						((HttpServletResponse)response).sendError(HttpServletResponse.SC_UNAUTHORIZED);
+						return;
+					} else {
+						chain.doFilter(request, response);
+					}
+				} 
+			}
 		}
 		
 		chain.doFilter(request, response);
