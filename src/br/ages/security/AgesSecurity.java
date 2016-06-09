@@ -42,7 +42,7 @@ public final class AgesSecurity implements Filter {
 				request.getSession().setAttribute(SESSION_KEY, user);
 			} 
 			else {
-				result.setMessage("O usuário não está cadastrado");
+				result.setMessage("Os dados informados estão incorretos");
 			}
 		} 
 		catch(ClassNotFoundException cnfe){
