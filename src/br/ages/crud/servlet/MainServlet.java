@@ -32,6 +32,9 @@ import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
 import br.ages.crud.model.Usuario;
 import br.ages.crud.util.LogParametrosSession;
+import br.ages.security.AgesSecurity;
+import br.ages.security.models.AgesSecurityResult.AgesSecurityStatus;
+import br.ages.security.models.AgesSecurityUser;
 
 @WebServlet("/main")
 public class MainServlet extends HttpServlet {
@@ -77,7 +80,7 @@ public class MainServlet extends HttpServlet {
 		try {
 			Command comando = verificarComando(acao);
 			proxima = comando.execute(request);
-			Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioSessao");
+			AgesSecurityUser usuario = (AgesSecurityUser) AgesSecurity.getLoggedUser(request);
 		} catch (NegocioException | SQLException | ParseException | PersistenciaException e) {
 			request.setAttribute("msgErro", e.getMessage());
 		}

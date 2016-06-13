@@ -32,11 +32,6 @@ public class LoginCommand implements Command {
 			
 			if (result.isSucceeded()) {
 				proxima = "index.jsp";
-				
-				// TODO - Obter Usuario do sistema cliente a partir do usuário AgesSecurityUser
-				Usuario usuarioDTO = new Usuario(username, password);
-				user = usuarioBO.validaUsuario(usuarioDTO);
-				request.getSession().setAttribute("usuarioSessao", user);
 				request.getSession().setAttribute("versao", util.getVersion());
 			}
 			else {
