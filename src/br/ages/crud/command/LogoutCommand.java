@@ -3,8 +3,6 @@ package br.ages.crud.command;
 import javax.servlet.http.HttpServletRequest;
 
 import br.ages.crud.util.MensagemContantes;
-import br.ages.security.AgesSecurity;
-import br.ages.security.models.AgesSecurityResult;
 
 public class LogoutCommand implements Command {
 
@@ -19,7 +17,6 @@ public class LogoutCommand implements Command {
 		
 
 		try {
-			AgesSecurityResult result = (AgesSecurityResult) AgesSecurity.logout(request);
 			request.getSession().setAttribute("usuarioSessao", null);
 			request.setAttribute("msgSucesso", MensagemContantes.MSG_INF_LOGOUT);
 		} catch (Exception e) {

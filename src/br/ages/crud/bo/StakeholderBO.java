@@ -2,7 +2,6 @@
 package br.ages.crud.bo;
 
 import java.sql.SQLException;
-import java.text.Normalizer;
 import java.text.ParseException;
 import java.util.List;
 

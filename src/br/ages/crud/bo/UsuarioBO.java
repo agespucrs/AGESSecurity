@@ -14,7 +14,6 @@ import br.ages.crud.model.TipoUsuario;
 import br.ages.crud.model.Usuario;
 import br.ages.crud.util.MensagemContantes;
 import br.ages.crud.validator.SenhaValidator;
-import br.ages.security.models.AgesSecurityResult;
 import br.ages.security.dao.AgesSecurityDAO;
 
 
