@@ -1,5 +1,4 @@
-<%@page import="br.ages.security.models.AgesSecurityUser"%>
-<%@page import="br.ages.security.AgesSecurity"%>
+<%@page import="br.ages.crud.model.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -49,7 +48,7 @@
     
     <body>
      <% 
-     	AgesSecurityUser agesSecurityUser = AgesSecurity.getLoggedUser(request); 
+     	Usuario usuario = (Usuario) session.getAttribute("userLogged"); 
      %>
     	<div class="container">
     	
@@ -92,7 +91,7 @@
         				<li class="dropdown">
         					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
         						<span class="glyphicon glyphicon-user"></span>
-        						Olá, <%=agesSecurityUser.getUsername()%>!
+        						Olá, <%= usuario.getUsuario() %>!
         						<span class="caret"></span>
         					</a>
                            

@@ -6,14 +6,11 @@ import java.util.Set;
 
 
 public class Mensagem {
-	//private TipoMsg tipomsg;
-	private Usuario emissor;
 	private Set<Usuario> receptores;
 	private String assunto;
 	private String conteudo;
 	
 	public Mensagem(Usuario emissor) {
-		this.emissor = emissor;
 		assunto = "";
 		conteudo = "";
 		receptores = new HashSet<Usuario>();

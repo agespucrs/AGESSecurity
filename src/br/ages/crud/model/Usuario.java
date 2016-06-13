@@ -11,7 +11,7 @@ import br.ages.security.models.AgesSecurityUser;
  * @author 3- Victor Diehl, Daniele de Souza.
  *
  */
-public class Usuario extends AgesSecurityUser implements Serializable, Comparable<Usuario> {
+public class Usuario implements Serializable, Comparable<Usuario> {
 
 	private static final long serialVersionUID = 2717027327683138959L;
 	private int idUsuario;
@@ -24,7 +24,12 @@ public class Usuario extends AgesSecurityUser implements Serializable, Comparabl
 	private String nome;
 	private String email;
 	private Date dataInclusao;
-
+	
+	public Usuario(AgesSecurityUser securityUser) {
+		setUsuario(securityUser.getUsername());
+		setSenha(securityUser.getPassword());
+	}
+	
 	public Usuario() {
 		// TODO Auto-generated constructor stub
 		this.dataInclusao = new Date();
@@ -36,7 +41,6 @@ public class Usuario extends AgesSecurityUser implements Serializable, Comparabl
 	}
 
 	public Usuario(String usuario, String senha, String matricula, String nome, String email, StatusUsuario statusUsuario, TipoUsuario tipoUsuario, PerfilAcesso perfilAcesso) {
-		super();
 		this.usuario = usuario;
 		this.senha = senha;
 		this.matricula = matricula;
