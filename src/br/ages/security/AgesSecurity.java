@@ -167,4 +167,8 @@ public final class AgesSecurity implements Filter {
 	}
 	
 	/**************** Fim Filtro (autorização) ****************/
+	
+	public static AgesSecurityUser getLoggedUser(HttpServletRequest request) {
+		return (AgesSecurityUser) request.getSession().getAttribute(SESSION_KEY);
+	}
 }

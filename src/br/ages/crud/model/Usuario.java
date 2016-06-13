@@ -3,13 +3,15 @@ package br.ages.crud.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import br.ages.security.models.AgesSecurityUser;
+
 /**
  * Entity Usuario - Data Transfer Objeto
  * 
  * @author 3- Victor Diehl, Daniele de Souza.
  *
  */
-public class Usuario implements Serializable, Comparable<Usuario> {
+public class Usuario extends AgesSecurityUser implements Serializable, Comparable<Usuario> {
 
 	private static final long serialVersionUID = 2717027327683138959L;
 	private int idUsuario;
