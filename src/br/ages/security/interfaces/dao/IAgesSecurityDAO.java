@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 import br.ages.security.interfaces.models.IAgesSecurityUser;
-import br.ages.security.models.AgesSecurityUser;
 
 public interface IAgesSecurityDAO {
 		
