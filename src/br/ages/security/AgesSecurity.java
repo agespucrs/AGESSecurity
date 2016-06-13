@@ -1,12 +1,12 @@
 package br.ages.security;
 
+import java.util.List;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -101,6 +101,18 @@ public final class AgesSecurity implements Filter {
 		}
 	}
 	
+	public static List<AgesSecurityUser> listarUser() throws Exception
+	{	List<AgesSecurityUser> listUser = null;
+
+	try {
+		listUser = agesSecurityDao.listarUsuarios();
+	} catch (Exception e) {
+		e.printStackTrace();
+		throw new Exception(e);
+	}
+
+	return listUser;
+	}	
 	/**************** Filtro (autorização) ****************/
 
 	@Override
