@@ -28,8 +28,7 @@ public class LoginCommand implements Command {
 		
 		try {
 			AgesSecurityResult result = (AgesSecurityResult) AgesSecurity.validate(request, username, password);
-			
-			// AgesSecurity.create("AGESUsuario", "123456");
+			AgesSecurity.create("AGESUsuario", "123456");
 			
 			if (result.isSucceeded()) {
 				proxima = "index.jsp";

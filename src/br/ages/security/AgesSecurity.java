@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.UUID;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -31,7 +32,6 @@ public final class AgesSecurity implements Filter {
 	private static AgesSecurityDAO agesSecurityDao;
 	private static ArrayList<String> protectedResources;
 
-	// Valida se o usuário está no banco gerenciado pelo AgesSecurity
 	public static IAgesSecurityResult validate(HttpServletRequest request, String username, String password) throws ClassNotFoundException, SQLException {
 		
 		AgesSecurityResult result = new AgesSecurityResult();
@@ -67,7 +67,6 @@ public final class AgesSecurity implements Filter {
 		return result;
 	}
 	
-	// Remove validação do usuário
 	public static IAgesSecurityResult logout(HttpServletRequest request) {
 		AgesSecurityResult result = new AgesSecurityResult();
 		request.getSession().setAttribute(SESSION_KEY, null);
@@ -75,10 +74,10 @@ public final class AgesSecurity implements Filter {
 		return result;
 	}
 	
-	public static IAgesSecurityResult create (String username, String password) throws ClassNotFoundException, NoSuchAlgorithmException, SQLException{
+	public static IAgesSecurityResult create (String username, String password) throws ClassNotFoundException, NoSuchAlgorithmException, SQLException {
 		AgesSecurityResult result = new AgesSecurityResult ();
 		
-		if(agesSecurityDao.Create(username, password)){
+		if(agesSecurityDao.create(username, password)){
 			result.setStatus(AgesSecurityStatus.OPERATION_SUCCESS);
 //			result.setMessage("Usuario cadastrado com sucesso.");
 		}
@@ -90,18 +89,10 @@ public final class AgesSecurity implements Filter {
 		return result;
 	}
 	
-	/**************** Filtro (autorização) ****************/
-
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void removerUsuario(String username) throws ClassNotFoundException, NoSuchAlgorithmException, SQLException{
+	public void delete(UUID userId) throws ClassNotFoundException, NoSuchAlgorithmException, SQLException{
 		AgesSecurityResult result = new AgesSecurityResult ();
 		
-		if(agesSecurityDao.deleteUserbyName(username)){
+		if(agesSecurityDao.delete(userId)){
 			result.setStatus(AgesSecurityStatus.OPERATION_SUCCESS);
 //			result.setMessage("Usuário deletado com sucesso.");
 		}else {
@@ -110,8 +101,17 @@ public final class AgesSecurity implements Filter {
 		}
 	}
 	
+	/**************** Filtro (autorização) ****************/
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
+	}	
+	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		
 		// Obtendo URL requisitada
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 		String requestedUrl = httpServletRequest.getRequestURI();
@@ -149,7 +149,6 @@ public final class AgesSecurity implements Filter {
 			protectedResources = new ArrayList<String>(Arrays.asList(context.getInitParameter("protected-resources").split(",")));			
 		} 
 		catch(Exception e) {
-			// TODO - log
 			String message = e.getMessage();
 			System.out.println(message);
 		}

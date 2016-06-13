@@ -47,7 +47,10 @@
 	</head>
     
     <body>
-     <% Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioSessao"); %>
+     <% 
+     	//AgesSecurityUser agesSecurityUser = AgesSecurity.getLoggedUser();
+     	Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioSessao"); 
+     %>
     	<div class="container">
     	
     			<nav class="navbar navbar-default">

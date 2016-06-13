@@ -27,7 +27,7 @@ public class RemoveUserCommand implements Command {
 			if( !usuario.getPerfilAcesso().equals(PerfilAcesso.ADMINISTRADOR) ) throw new NegocioException(MensagemContantes.MSG_INF_DENY);
 			
 			String username = request.getParameter("usuario");
-			agesSecurity.removerUsuario(username);
+			// agesSecurity.removerUsuario(username);
 			// usuarioBO.removerUsuario(usuario);
 			
 			
