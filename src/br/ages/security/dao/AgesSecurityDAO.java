@@ -68,14 +68,13 @@ public class AgesSecurityDAO implements IAgesSecurityDAO {
 	}
 
 	public boolean delete(UUID userId) throws ClassNotFoundException, SQLException {
-		Connection connection = ConnectionUtil.getConnection();
 		boolean isSucceed = false;
 		
 		StringBuilder sql = new StringBuilder();
-		sql.append("delete * from ages_security_user where id = ?");
+		sql.append("delete from ages_security_user where id = ?");
 		
 		PreparedStatement statement = connection.prepareStatement(sql.toString());
-		statement.setString(1, userId.toString());
+		statement.setString(1, userId.toString().replaceAll("-", ""));
 		
 		if (statement.execute()) {
 			isSucceed = true;			

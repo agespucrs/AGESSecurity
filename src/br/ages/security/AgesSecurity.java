@@ -81,7 +81,7 @@ public final class AgesSecurity implements Filter {
 		return result;
 	}
 	
-	public void delete(UUID userId) throws ClassNotFoundException, NoSuchAlgorithmException, SQLException{
+	public static void delete(UUID userId) throws ClassNotFoundException, NoSuchAlgorithmException, SQLException{
 		AgesSecurityResult result = new AgesSecurityResult ();
 		
 		if(agesSecurityDao.delete(userId)){

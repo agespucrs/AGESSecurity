@@ -1,5 +1,7 @@
 package br.ages.crud.command;
 
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 
 import br.ages.crud.bo.UsuarioBO;
@@ -28,7 +30,8 @@ public class LoginCommand implements Command {
 		
 		try {
 			AgesSecurityResult result = (AgesSecurityResult) AgesSecurity.validate(request, username, password);
-			AgesSecurity.create("AGESUsuario", "123456");
+			// AgesSecurity.create("AGESUsuario", "123456");
+			AgesSecurity.delete(UUID.fromString("93596e4b-17a1-4888-b2c7-21c7235f0b27"));
 			
 			if (result.isSucceeded()) {
 				proxima = "index.jsp";
