@@ -21,6 +21,7 @@ import javax.servlet.http.HttpSession;
 import br.ages.security.dao.AgesSecurityDAO;
 import br.ages.security.interfaces.models.IAgesSecurityResult;
 import br.ages.security.models.AgesSecurityResult;
+import br.ages.security.models.AgesSecurityResult.AgesSecurityStatus;
 import br.ages.security.models.AgesSecurityUser;
 
 @WebFilter("/*")
@@ -42,20 +43,25 @@ public final class AgesSecurity implements Filter {
 				request.getSession().setAttribute(SESSION_KEY, user);
 			} 
 			else {
-				result.setMessage("Os dados informados estão incorretos");
+				result.setStatus(AgesSecurityStatus.INVALID_DATA);
+//				result.setMessage("Os dados informados estão incorretos");
 			}
 		} 
 		catch(ClassNotFoundException cnfe){
-			result.setMessage("Exceção interna: classe não encontrada.");
+			result.setStatus(AgesSecurityStatus.CLASS_NOT_FOUND);
+//			result.setMessage("Exceção interna: classe não encontrada.");
 		}
 		catch(SQLException sqle){
-			result.setMessage("Erro na comunicação com o banco de dados.");
+			result.setStatus(AgesSecurityStatus.DATABASE_CONNECTION_ERROR);
+//			result.setMessage("Erro na comunicação com o banco de dados.");
 		}
 		catch(NoSuchAlgorithmException nsae){
-			result.setMessage("Algortimo de criptografia não encontrado.");
+			result.setStatus(AgesSecurityStatus.UNEXPECTED_ERROR);
+//			result.setMessage("Algortimo de criptografia não encontrado.");
 		}
 		catch(Exception e) {
-			result.setMessage("Ocorreu um erro inesperado.");
+			result.setStatus(AgesSecurityStatus.UNEXPECTED_ERROR);
+//			result.setMessage("Ocorreu um erro inesperado.");
 		}
 		
 		return result;
@@ -73,10 +79,12 @@ public final class AgesSecurity implements Filter {
 		AgesSecurityResult result = new AgesSecurityResult ();
 		
 		if(agesSecurityDao.Create(username, password)){
-			result.setMessage("Usuario cadastrado com sucesso.");
+			result.setStatus(AgesSecurityStatus.OPERATION_SUCCESS);
+//			result.setMessage("Usuario cadastrado com sucesso.");
 		}
 		else {
-			result.setMessage("Nome de usuario já cadastrado");
+			result.setStatus(AgesSecurityStatus.DATA_ALREADY_EXISTS);
+//			result.setMessage("Nome de usuario já cadastrado");
 		} 
 			
 		return result;
@@ -94,9 +102,11 @@ public final class AgesSecurity implements Filter {
 		AgesSecurityResult result = new AgesSecurityResult ();
 		
 		if(agesSecurityDao.deleteUserbyName(username)){
-			result.setMessage("Usuário deletado com sucesso.");
+			result.setStatus(AgesSecurityStatus.OPERATION_SUCCESS);
+//			result.setMessage("Usuário deletado com sucesso.");
 		}else {
-			result.setMessage("Usuário inexistente");
+			result.setStatus(AgesSecurityStatus.DATA_NOT_EXISTS);
+//			result.setMessage("Usuário inexistente");
 		}
 	}
 	
@@ -141,6 +151,7 @@ public final class AgesSecurity implements Filter {
 		catch(Exception e) {
 			// TODO - log
 			String message = e.getMessage();
+			System.out.println(message);
 		}
 	}
 	
