@@ -8,7 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletContext;
 
 import br.ages.security.infrastructure.ConnectionUtil;
@@ -104,4 +105,39 @@ public class AgesSecurityDAO implements IAgesSecurityDAO {
 		// Get complete hashed password in hex format
 		return sb.toString();
 	}
+	
+
+	public List<AgesSecurityUser> listarUsuarios() throws Exception, SQLException {
+		List<AgesSecurityUser> listarUsuarios = new ArrayList<>();
+		Connection conexao = null;
+		// tentativa de readaptação do listarUsuarios()
+		try {
+			
+			ConnectionUtil.getConnection();
+
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT ");
+			sql.append("`USERNAME`,");
+			sql.append("`PASSWORD`");
+			sql.append("from  ages_security_user");
+
+			PreparedStatement statement = conexao.prepareStatement(sql.toString());
+			ResultSet resultset = statement.executeQuery();
+			while (resultset.next()) {
+				AgesSecurityUser dto = new AgesSecurityUser();
+				dto.setUsername(resultset.getString("USERNAME"));
+				dto.setPassword(resultset.getString("PASSWORD"));
+
+				listarUsuarios.add(dto);
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new Exception(e);
+		} finally {
+			conexao.close();
+		}
+		return listarUsuarios;
+	}
+
+
 }
