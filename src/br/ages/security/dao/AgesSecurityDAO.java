@@ -105,11 +105,8 @@ public class AgesSecurityDAO implements IAgesSecurityDAO {
 		return sb.toString();
 	}
 	
-
 	public List<AgesSecurityUser> listarUsuarios() throws Exception, SQLException {
 		List<AgesSecurityUser> listarUsuarios = new ArrayList<>();
-		Connection conexao = null;
-		// tentativa de readaptação do listarUsuarios()
 		try {
 			
 			ConnectionUtil.getConnection();
@@ -120,7 +117,7 @@ public class AgesSecurityDAO implements IAgesSecurityDAO {
 			sql.append("`PASSWORD`");
 			sql.append("from  ages_security_user");
 
-			PreparedStatement statement = conexao.prepareStatement(sql.toString());
+			PreparedStatement statement = connection.prepareStatement(sql.toString());
 			ResultSet resultset = statement.executeQuery();
 			while (resultset.next()) {
 				AgesSecurityUser dto = new AgesSecurityUser();
@@ -132,11 +129,8 @@ public class AgesSecurityDAO implements IAgesSecurityDAO {
 
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new Exception(e);
-		} finally {
-			conexao.close();
 		}
 		return listarUsuarios;
 	}
-
 
 }
