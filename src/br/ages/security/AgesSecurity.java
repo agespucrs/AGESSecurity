@@ -44,24 +44,19 @@ public final class AgesSecurity implements Filter {
 			} 
 			else {
 				result.setStatus(AgesSecurityStatus.INVALID_DATA);
-//				result.setMessage("Os dados informados estão incorretos");
 			}
 		} 
 		catch(ClassNotFoundException cnfe){
 			result.setStatus(AgesSecurityStatus.CLASS_NOT_FOUND);
-//			result.setMessage("Exceção interna: classe não encontrada.");
 		}
 		catch(SQLException sqle){
 			result.setStatus(AgesSecurityStatus.DATABASE_CONNECTION_ERROR);
-//			result.setMessage("Erro na comunicação com o banco de dados.");
 		}
 		catch(NoSuchAlgorithmException nsae){
 			result.setStatus(AgesSecurityStatus.UNEXPECTED_ERROR);
-//			result.setMessage("Algortimo de criptografia não encontrado.");
 		}
 		catch(Exception e) {
 			result.setStatus(AgesSecurityStatus.UNEXPECTED_ERROR);
-//			result.setMessage("Ocorreu um erro inesperado.");
 		}
 		
 		return result;
@@ -79,11 +74,9 @@ public final class AgesSecurity implements Filter {
 		
 		if(agesSecurityDao.create(username, password)){
 			result.setStatus(AgesSecurityStatus.OPERATION_SUCCESS);
-//			result.setMessage("Usuario cadastrado com sucesso.");
 		}
 		else {
 			result.setStatus(AgesSecurityStatus.DATA_ALREADY_EXISTS);
-//			result.setMessage("Nome de usuario já cadastrado");
 		} 
 			
 		return result;
@@ -94,25 +87,26 @@ public final class AgesSecurity implements Filter {
 		
 		if(agesSecurityDao.delete(userId)){
 			result.setStatus(AgesSecurityStatus.OPERATION_SUCCESS);
-//			result.setMessage("Usuário deletado com sucesso.");
 		}else {
 			result.setStatus(AgesSecurityStatus.DATA_NOT_EXISTS);
-//			result.setMessage("Usuário inexistente");
 		}
 	}
 	
-	public static List<AgesSecurityUser> listarUser() throws Exception
-	{	List<AgesSecurityUser> listUser = null;
-
-	try {
-		listUser = agesSecurityDao.listarUsuarios();
-	} catch (Exception e) {
-		e.printStackTrace();
-		throw new Exception(e);
-	}
-
-	return listUser;
+	public static List<AgesSecurityUser> list() throws Exception
+	{	
+		try {
+			return agesSecurityDao.list();
+		} 
+		catch(SQLException sqle){
+			sqle.printStackTrace();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}	
+	
 	/**************** Filtro (autorização) ****************/
 
 	@Override
@@ -153,11 +147,7 @@ public final class AgesSecurity implements Filter {
 	public void init(FilterConfig arg0) throws ServletException {
 		try{
 			ServletContext context = arg0.getServletContext();
-			
-			// Detalhes da conexão com o banco de dados
-			agesSecurityDao = new AgesSecurityDAO(context);
-			
-			// Lista de URLs protegidas 
+			agesSecurityDao = new AgesSecurityDAO(context); 
 			protectedResources = new ArrayList<String>(Arrays.asList(context.getInitParameter("protected-resources").split(",")));			
 		} 
 		catch(Exception e) {

@@ -48,6 +48,25 @@ public class AgesSecurityDAO implements IAgesSecurityDAO {
 		
 		return true;
 	}
+	
+	public List<AgesSecurityUser> list() throws SQLException {
+		List<AgesSecurityUser> userList = new ArrayList<>();
+
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT * FROM ages_security_user");
+		
+		PreparedStatement statement = connection.prepareStatement(sql.toString());
+		ResultSet resultset = statement.executeQuery();
+		while (resultset.next()) {
+			AgesSecurityUser dto = new AgesSecurityUser();
+			dto.setUsername(resultset.getString("USERNAME"));
+			dto.setPassword(resultset.getString("PASSWORD"));
+
+			userList.add(dto);
+		}
+		
+		return userList;
+	}
 
 	public IAgesSecurityUser getUserByUsernameAndPassword(String username, String password) throws ClassNotFoundException, SQLException, NoSuchAlgorithmException {
 		AgesSecurityUser user = null;
@@ -105,32 +124,6 @@ public class AgesSecurityDAO implements IAgesSecurityDAO {
 		return sb.toString();
 	}
 	
-	public List<AgesSecurityUser> listarUsuarios() throws Exception, SQLException {
-		List<AgesSecurityUser> listarUsuarios = new ArrayList<>();
-		try {
-			
-			ConnectionUtil.getConnection();
-
-			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT ");
-			sql.append("`USERNAME`,");
-			sql.append("`PASSWORD`");
-			sql.append("from  ages_security_user");
-
-			PreparedStatement statement = connection.prepareStatement(sql.toString());
-			ResultSet resultset = statement.executeQuery();
-			while (resultset.next()) {
-				AgesSecurityUser dto = new AgesSecurityUser();
-				dto.setUsername(resultset.getString("USERNAME"));
-				dto.setPassword(resultset.getString("PASSWORD"));
-
-				listarUsuarios.add(dto);
-			}
-
-		} catch (ClassNotFoundException | SQLException e) {
-			throw new Exception(e);
-		}
-		return listarUsuarios;
-	}
+	
 
 }

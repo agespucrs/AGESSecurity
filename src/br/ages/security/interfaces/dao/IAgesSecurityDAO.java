@@ -2,9 +2,11 @@ package br.ages.security.interfaces.dao;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.UUID;
 
 import br.ages.security.interfaces.models.IAgesSecurityUser;
+import br.ages.security.models.AgesSecurityUser;
 
 public interface IAgesSecurityDAO {
 		
@@ -20,6 +22,14 @@ public interface IAgesSecurityDAO {
 	 */
 	boolean create(String username, String password) throws ClassNotFoundException, SQLException, NoSuchAlgorithmException;
 	
+	
+	/**
+	 * Retorna a listagem de todos os usuários cadastrados
+	 * @return
+	 * @throws Exception
+	 * @throws SQLException
+	 */
+	List<AgesSecurityUser> list() throws SQLException;
 	
 	/**
 	 * Busca um usuário pelo nome de usuário e senha

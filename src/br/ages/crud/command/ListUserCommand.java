@@ -22,7 +22,7 @@ public class ListUserCommand implements Command {
 		proxima = "user/listUser.jsp";
 
 		try {
-			AgesSecurity.listarUser();
+			// AgesSecurity.listarUser();
 			List<Usuario> listaUsuarios = usuarioBO.listarUsuario();
 			request.setAttribute("listaUsuarios", listaUsuarios);
 		} catch (NegocioException e) {
