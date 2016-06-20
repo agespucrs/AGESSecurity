@@ -14,6 +14,8 @@ import br.ages.crud.model.TipoUsuario;
 import br.ages.crud.model.Usuario;
 import br.ages.crud.util.MensagemContantes;
 import br.ages.crud.validator.SenhaValidator;
+import br.ages.security.dao.AgesSecurityDAO;
+
 
 /**
  * Gerencia os comportamentos de negocio do Usuario Associa os parametros da
@@ -24,6 +26,7 @@ import br.ages.crud.validator.SenhaValidator;
  */
 public class UsuarioBO {
 	UsuarioDAO usuarioDAO = null;
+	AgesSecurityDAO agesSecDAO = null;
 
 	public UsuarioBO() {
 		usuarioDAO = new UsuarioDAO();
@@ -240,6 +243,8 @@ public class UsuarioBO {
 			throw new NegocioException(MensagemContantes.MSG_ERR_REMOVE_USUARIO_EM_PROJETO);
 		}
 	}
+	
+	
 
 	private boolean validaUsuarioProjeto(Integer idUsuario) throws NegocioException, SQLException {
 		// chama um DAO que verifica se o usuario está em algum projeto,

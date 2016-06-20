@@ -4,13 +4,10 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import br.ages.crud.bo.StakeholderBO;
-import br.ages.crud.model.Stakeholder;
-
 public class CreateScreenStakeholderCommand implements Command {
 
 	private String proxima;
-	private StakeholderBO stakeholderBO;
+//	private StakeholderBO stakeholderBO;
 
 	@Override
 	public String execute(HttpServletRequest request) throws SQLException {
@@ -19,9 +16,9 @@ public class CreateScreenStakeholderCommand implements Command {
 		try {
 			if (isEdit != null && !"".equals(isEdit)) {
 
-				int idStakeholder = Integer.parseInt(request.getParameter("idStakeholder"));
-				Stakeholder stakeholder = stakeholderBO.buscaStakeholderId(idStakeholder);
-				request.setAttribute("nomeStakeholder", stakeholder.getNomeStakeholder());
+//				int idStakeholder = Integer.parseInt(request.getParameter("idStakeholder"));
+//				Stakeholder stakeholder = stakeholderBO.buscaStakeholderId(idStakeholder);
+//				request.setAttribute("nomeStakeholder", stakeholder.getNomeStakeholder());
 				
 				proxima = "project/addStakeholder.jsp";
 

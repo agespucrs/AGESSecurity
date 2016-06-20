@@ -30,7 +30,6 @@ import br.ages.crud.command.RemoveUserCommand;
 import br.ages.crud.command.SenhaCommand;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
-import br.ages.crud.model.Usuario;
 import br.ages.crud.util.LogParametrosSession;
 
 @WebServlet("/main")
@@ -48,24 +47,18 @@ public class MainServlet extends HttpServlet {
 		comandos.put("recuperarSenha", new SenhaCommand());
 		
 		//COMANDOS DE USUARIO
-		
 		comandos.put("telaUser", new CreateScreenUserCommand());
 		comandos.put("listUser", new ListUserCommand());
 		comandos.put("addUser", new AddUserCommand());
 		comandos.put("editUser", new EditUserCommand());
 		comandos.put("removerUsuario", new RemoveUserCommand());
 		
-		
-		
 		//COMANDOS DE STAKEHOLDER
-		
 		comandos.put("telaStakeholder", new CreateScreenStakeholderCommand());
 		comandos.put("listaStakeholders", new ListStakeholdersCommand());
 		comandos.put("addStakeholder", new AddStakeholderCommand());
 		comandos.put("editaStakeholder", new EditStakeholderCommand());
-		comandos.put("removeStakeholder", new RemoveStakeholderCommand());
-
-	
+		comandos.put("removeStakeholder", new RemoveStakeholderCommand());	
 	}
 
 	@Override
@@ -77,9 +70,6 @@ public class MainServlet extends HttpServlet {
 		try {
 			Command comando = verificarComando(acao);
 			proxima = comando.execute(request);
-			Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioSessao");
-			if(usuario != null)
-				logger.debug("User: " +usuario.getUsuario() + " - comando " + comando.toString() + " acao: " +acao );
 		} catch (NegocioException | SQLException | ParseException | PersistenciaException e) {
 			request.setAttribute("msgErro", e.getMessage());
 		}

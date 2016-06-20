@@ -53,6 +53,8 @@ public class MensagemContantes {
 	
 	public static final String MSG_SUC_REMOVE_USUARIO= "Usuário ? removido com sucesso!";
 	
+	public static final String MSG_REJ_REMOVE_USUARIO= "Usuário ? não foi removido!";
+	
 	public static final String MSG_SUC_ATUALIZADA_PESSOA = "Atualização de Pessoa efetuada com sucesso!";
 	
 	public static final String MSG_INF_LOGOUT = "Logout do Usuário efetuado com sucesso!";

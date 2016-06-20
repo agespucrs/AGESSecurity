@@ -1,40 +1,48 @@
 package br.ages.crud.command;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 
-import br.ages.crud.bo.UsuarioBO;
-import br.ages.crud.exception.NegocioException;
 import br.ages.crud.model.Usuario;
 import br.ages.crud.util.Util;
+import br.ages.security.AgesSecurity;
+import br.ages.security.models.AgesSecurityResult;
+import br.ages.security.models.AgesSecurityUser;
 
 public class LoginCommand implements Command {
 
-	private UsuarioBO usuarioBO;
-
 	private String proxima;
-
 	private Util util;
 
 	@Override
 	public String execute(HttpServletRequest request) {
 		// seta a mesma pagina, para o caso de erro/exceção
 		proxima = "login.jsp";
-		Usuario user = new Usuario();
-		usuarioBO = new UsuarioBO();
 		util = new Util();
 
-
-		Usuario usuarioDTO = new Usuario((String) request.getParameter("login"), (String) request.getParameter("senha"));
-
+		String username = request.getParameter("login");
+		String password = request.getParameter("senha");
+		
 		try {
-			user = usuarioBO.validaUsuario(usuarioDTO); 
-			if (user != null) {
-				request.getSession().setAttribute("usuarioSessao", user);
-				request.getSession().setAttribute("versao", util.getVersion());
-				proxima = "index.jsp";
+			AgesSecurityResult result = (AgesSecurityResult) AgesSecurity.validate(request, username, password);
 			
+			// AgesSecurity.create("AGESUsuario2", "123456");
+			// AgesSecurity.delete(UUID.fromString("93596e4b-17a1-4888-b2c7-21c7235f0b27"));
+			// ArrayList<AgesSecurityUser> users = (ArrayList<AgesSecurityUser>) AgesSecurity.list();
+			
+			if (result.isSucceeded()) {
+				proxima = "index.jsp";
+				Usuario user = new Usuario(AgesSecurity.getLoggedUser(request));
+				request.getSession().setAttribute("userLogged", user);
+				request.getSession().setAttribute("versao", util.getVersion());
 			}
-		} catch (NegocioException e) {
+			else {
+				request.setAttribute("msgErro" , result.getMessage());
+			}
+			
+		} catch(Exception e){
 			request.setAttribute("msgErro" , e.getMessage());
 			return proxima;
 		}

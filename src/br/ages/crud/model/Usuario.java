@@ -3,6 +3,8 @@ package br.ages.crud.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import br.ages.security.models.AgesSecurityUser;
+
 /**
  * Entity Usuario - Data Transfer Objeto
  * 
@@ -22,7 +24,12 @@ public class Usuario implements Serializable, Comparable<Usuario> {
 	private String nome;
 	private String email;
 	private Date dataInclusao;
-
+	
+	public Usuario(AgesSecurityUser securityUser) {
+		setUsuario(securityUser.getUsername());
+		setSenha(securityUser.getPassword());
+	}
+	
 	public Usuario() {
 		// TODO Auto-generated constructor stub
 		this.dataInclusao = new Date();
@@ -34,7 +41,6 @@ public class Usuario implements Serializable, Comparable<Usuario> {
 	}
 
 	public Usuario(String usuario, String senha, String matricula, String nome, String email, StatusUsuario statusUsuario, TipoUsuario tipoUsuario, PerfilAcesso perfilAcesso) {
-		super();
 		this.usuario = usuario;
 		this.senha = senha;
 		this.matricula = matricula;

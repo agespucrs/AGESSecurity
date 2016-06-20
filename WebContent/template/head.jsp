@@ -47,7 +47,9 @@
 	</head>
     
     <body>
-     <% Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioSessao"); %>
+     <% 
+     	Usuario usuario = (Usuario) session.getAttribute("userLogged"); 
+     %>
     	<div class="container">
     	
     			<nav class="navbar navbar-default">
@@ -89,7 +91,7 @@
         				<li class="dropdown">
         					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
         						<span class="glyphicon glyphicon-user"></span>
-        						Olá, <%=usuarioSessao.getNome()%>!
+        						Olá, <%= usuario.getUsuario() %>!
         						<span class="caret"></span>
         					</a>
                            

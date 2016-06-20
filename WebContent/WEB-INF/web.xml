@@ -4,4 +4,35 @@
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
+
+  <error-page>
+    <location>/login.jsp</location>
+  </error-page>
+  
+  <!-- Parâmetros da conexão -->
+  <context-param>
+    <param-name>connection-url</param-name>
+    <param-value>jdbc:mysql://localhost:3306/security_e</param-value>
+  </context-param>
+  
+  <context-param>
+    <param-name>sgbd-user</param-name>
+    <param-value>root</param-value>
+  </context-param>
+  
+  <context-param>
+    <param-name>sgbd-password</param-name>
+    <param-value>senha</param-value>
+  </context-param>
+  
+  <context-param>
+    <param-name>sgbd-driver</param-name>
+    <param-value>com.mysql.jdbc.Driver</param-value>
+  </context-param>
+  
+  <!-- URLs protegidas -->
+  <context-param>
+    <param-name>protected-resources</param-name>
+    <param-value>index, index2, index3</param-value>
+  </context-param>
 </web-app>
