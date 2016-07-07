@@ -1,7 +1,7 @@
-# fluxoAges
+# AgesSecurity
 Sistema de controle do fluxo de atividades da AGES.
 
-Vers„o de ProduÁ„o Atual
+Vers√£o de Produ√ß√£o Atual
 
 Lider Tecnico do Projeto Daniele Souza
 
