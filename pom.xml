@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>FluxoAGES</groupId>
-	<artifactId>FluxoAGES</artifactId>
-	<version>0.0.${build.number}-SNAPSHOT</version>
+	<groupId>AgesSecurity</groupId>
+	<artifactId>AgesSecurity-Core</artifactId>
+	<version>1.0.${build.number}</version>
 	<packaging>war</packaging>
-	<name>FluxoAGES</name>
-	<description>Projeto Fluxo AGES - FACIN - PUCRS</description>
+	<name>AgesSecurity</name>
+	<description>Projeto Componente de Segurança AGES - FACIN - PUCRS</description>
 	<properties>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 	</properties>
@@ -168,5 +168,5 @@
 		<name>AGES - Agencia Experimental de Engenharia de Software</name>
 		<url>www.ages.pucrs.br</url>
 	</organization>
-	<url>www.ages.pucrs.br/fluxoages</url>
+	<url>www.ages.pucrs.br/agessecurity</url>
 </project>
