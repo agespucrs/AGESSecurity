@@ -4,7 +4,7 @@
 	<groupId>AgesSecurity</groupId>
 	<artifactId>AgesSecurity-Core</artifactId>
 	<version>1.0.${build.number}</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>AgesSecurity</name>
 	<description>Projeto Componente de Segurança AGES - FACIN - PUCRS</description>
 	<properties>
